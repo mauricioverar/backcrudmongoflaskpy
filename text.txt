@@ -32,3 +32,5 @@ id
 652eebb620586cca0504093d
 652eebb620586cca0504093c
 se guarda
+
+python src/app.py

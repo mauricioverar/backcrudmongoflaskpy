@@ -25,24 +25,32 @@ def index():
 
 # db.collection.metod()
 
-@app.route('/users', methods=['POST'])
+@app.route('/users', methods=['POST']) # ver dato email unico ****
 def createUser():
   print(request.json) # configurar headers en postman
   # print(request.json['name'])
   # return 'recivido'
   # # insert_one
   # id = db.users.insert_one({ 
-  db.users.insert_one({
-    'name': request.json['name'],
-    'email': request.json['email'],
-    'password': request.json['password']
-  })
-  # print('algo')
-  # newObjectId = ObjectId() # "652edc4e8357246c08971190"
-  # print(jsonify(str(ObjectId(id))))
-  # print(str(ObjectId(id)))
-  return jsonify(str(ObjectId())) # "652ee2c38b043dc4de85cc65"
-  # return 'recivido'
+
+  existe_email = db.users.find_one({'email': request.json['email']})
+  # if existe_email == True:
+  print(existe_email, '38')
+
+  if existe_email == None:     
+    db.users.insert_one({
+      'name': request.json['name'],
+      'email': request.json['email'],
+      'password': request.json['password']
+    })
+    # print('algo')
+    # newObjectId = ObjectId() # "652edc4e8357246c08971190"
+    # print(jsonify(str(ObjectId(id))))
+    # print(str(ObjectId(id)))
+    return jsonify(str(ObjectId())) # "652ee2c38b043dc4de85cc65"
+    # return 'recivido'
+  else:
+    return jsonify({"message": 'ya existe email'})
 
 
 @app.route('/users', methods=['GET'])
