@@ -1,9 +1,16 @@
+from dotenv import load_dotenv
+import os
 from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo #, ObjectId
 from flask_cors import CORS
 
 from bson import ObjectId
 # ObjectId(id) // conversión del id
+
+
+load_dotenv()
+
+print(os.environ.get("USER"))
 
 app = Flask(__name__)
 app.config['MONGO_URI'] = 'mongodb://localhost/pythonreact'
