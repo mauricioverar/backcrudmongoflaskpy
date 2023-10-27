@@ -25,6 +25,7 @@ def index():
 
 # db.collection.metod()
 
+# Post
 @app.route('/users', methods=['POST']) # ver dato email unico ****
 def createUser():
   print(request.json) # configurar headers en postman
@@ -56,13 +57,14 @@ def createUser():
 @app.route('/users', methods=['GET'])
 def getUsers():
     users = []
-    for doc in db.users.find():
+    for doc in db.users.find(): # ********************************* conectar servicio MongoDB *********************************
         users.append({
             '_id': str(ObjectId(doc['_id'])),
             'name': doc['name'],
             'email': doc['email'],
             'password': doc['password']
         })
+    print('datos enviados OK')
     return jsonify(users)
 
 @app.route('/users/<id>', methods=['GET'])
