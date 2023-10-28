@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- poner este archivo dentro de una subcarpeta -->
+<head>
+  <title>página {{nombre}}</title>
+  <meta charset="utf-8" />
+</head>
+
+<body>
+  <!-- <h2>Vamos a saludar</h2> -->
+  {% if nombre %}
+  <h1>Hola {{nombre|title}}</h1>
+  
+  {%else%}
+  <p>No has indicado un nombre</p>
+  {% endif %}
+
+  <!-- formato tabla -->
+  <pre>{{df}}</pre>
+  <pre>{{ej}}</pre>
+  <matplotlib.lines.Line2D at 0x7ebedd79b520>
+</body>
+
+</html>

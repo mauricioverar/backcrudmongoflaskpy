@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
-import os
+import os #  permite acceder a funcionalidades dependientes del Sistema Operativo
+# os.chdir(nuevo)
 from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo #, ObjectId
 from flask_cors import CORS
@@ -7,14 +8,16 @@ from flask_cors import CORS
 from bson import ObjectId
 # ObjectId(id) // conversión del id
 
+# para descargar archivos de colab
+# from google.colab import files
+# files.download(url_de_descarga)
 
 load_dotenv()
 
 print(os.environ.get("USER"))
 
 app = Flask(__name__)
-app.config['MONGO_URI'] = 'mongodb://localhost/pythonreact'
-# app.config['MONGO_URI'] = 'mongodb://localhost:27017/pythonreact'
+app.config['MONGO_URI'] = os.environ.get("URI")
 mongo = PyMongo(app)
 
 CORS(app)
@@ -25,9 +28,9 @@ db = mongo.db.pythonreact
 # Routes
 @app.route('/')
 def index():
+  online_users = mongo.db.users.find({"online": True})
+  # print(online_users) # <pymongo.cursor.Cursor object at 0x0000025991CAC920>
   return '<h1>Hola Mundo</h1>'
-  """ online_users = mongo.db.users.find({"online": True})
-  return online_users """
 
 
 # db.collection.metod()
@@ -104,3 +107,5 @@ def updateUser(id):
 # inicializar
 if __name__ == "__main__":
     app.run(debug=True)
+
+# python src/app.py
