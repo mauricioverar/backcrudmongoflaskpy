@@ -160,24 +160,26 @@ df_europa = df_nations[df_nations["region"]=="Europe"] # con e
 sns.set_style(rc = {'axes.facecolor': 'lightsteelblue'})
 
 # Comenzaremos con crear un histograma que nos muestre la distribución del índice gini
-graf=sns.displot(df_nations["gini"], kind="hist")
 
+# figure_4
+# graf=sns.displot(df_nations["gini"], kind="hist")
+
+# figure_5
 # graf=sns.displot(df_nations["gini"], kind="hist", binwidth = 0.5) # grosor barra
 
+# figure_6
 # graf=sns.displot(df_nations["gini"], kind="hist", color='red') # color barras
 
 
 import matplotlib.pyplot as plt
 
-# sns.displot(df_nations["gini"], kind="hist") # sin red line promedio
+sns.displot(df_nations["gini"], kind="hist") # sin red line promedio
 plt.axvline(df_nations["gini"].mean(), color = "tomato") # red line
 
 
-
-
 #Graficamos
-df_euafr = df_nations.loc[df_nations["region"].isin(["Europe","Africa"])]
-sns.barplot(data=df_euafr, x="region", y="chldmort")
+""" df_euafr = df_nations.loc[df_nations["region"].isin(["Europe","Africa"])]
+sns.barplot(data=df_euafr, x="region", y="chldmort") """
 
 # Otro gráfico de barras: Alfabetismo promedio entre Americas y el resto del mundo
 
@@ -192,29 +194,32 @@ alfabetismo_promedio_resto_mundo = df_resto_mundo['literacy'].mean()
 # Crear el gráfico de barras utilizando sns.barplot
 # sns.<tipo_grafico>(x, y) *******************************************************************************************
 
+# figure_7
 # sns.barplot(x=['Americas', 'Rest of the world'], y=[alfabetismo_promedio_americas, alfabetismo_promedio_resto_mundo])
 
 # Ahora usando gráfico Boxplot para observar la distribución de la escolaridad por región
 
-sns.boxplot(x=df_nations["region"], y=df_nations["school"])
+# Figure_1
+# sns.boxplot(x=df_nations["region"], y=df_nations["school"])
 
 #Otra forma de observar la información es a traves de los diagramas de dispersión, pero para usar estos necesitamos eliminar datos perdidos en el dataset.
 df_limpia = df_nations.dropna()
 
 df_limpia # datos dispersion
 
+# figure_8
 # sns.scatterplot(x=df_limpia["school"], y=df_limpia["literacy"])
 
 # ¿Cómo se podría crear un diagrama de dispersión de la tasa de escolaridad ("school") versus el pib ("gdp")?
 
 
-# corr = df_nations.corr()
+""" corr = df_nations.corr()
+plt.rcParams["figure.figsize"] =(8,8)
+sns.heatmap(corr, cmap="Greens", annot=True) """
 
 """ <ipython-input-20-3ed480d8f3ae>:1: FutureWarning: The default value of numeric_only in DataFrame.corr is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.
   corr = df_nations.corr() """
 
-""" plt.rcParams["figure.figsize"] =(8,8)
-sns.heatmap(corr, cmap="Greens", annot=True) """
 
 
 
@@ -245,14 +250,16 @@ fig, ax = plt.subplots()
 ax.plot(range(5), marker = "o")
 
 # plt.title('Título del gráfico')
+
+# Figure_2
 plt.title('Título del gráfico', fontdict = {'fontsize': 20, 
                               'fontweight': 'bold', # Estilo
                               'color': 'red'})
 
-ej=plt.show() # muestra grafico
 
 # ej=sns.boxplot(x=df_nations["region"], y=df_nations["school"])
 
+ej=plt.show() # muestra grafico
 
 """ sns.displot(
     df_nations["gini"], x="flipper_length_mm", col="species", row="sex",
